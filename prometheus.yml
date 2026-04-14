@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s  # scrape every 15 seconds
+
+scrape_configs:
+  # Flask app metrics
+  - job_name: 'app'
+    static_configs:
+      - targets: ['host.docker.internal:5000']  # points to your Windows host
+    metrics_path: /metrics  # Prometheus endpoint in Flask
+
+  # Jenkins metrics
+  - job_name: 'jenkins'
+    static_configs:
+      - targets: ['host.docker.internal:8080']  # points to your Windows host
+    metrics_path: /prometheus  # Jenkins Prometheus plugin endpoint
